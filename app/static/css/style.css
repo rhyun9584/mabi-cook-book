@@ -1,0 +1,17 @@
+body {
+    padding-top: 70px;
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-signin{
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    margin: auto;
+}
