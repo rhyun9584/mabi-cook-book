@@ -7,14 +7,24 @@
         {% include "form_errors.html" %}
         <div class="form-group">
             <label for="email">이메일 ID</label>
-            <input type="text" name="email" id="email" class="form-control" placeholder="이메일 ID" value="{{ form.email.data or '' }}">
+            <input type="text" name="email" id="email" class="form-control" placeholder="이메일 ID">
         </div>
         <div class="form-group">
             <label for="password">비밀번호</label>
-            <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호" value="{{ form.password.data or '' }}">
+            <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호">
+        </div>
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" name="saveId" id="saveId"/>
+            <label for="saveId" class="form-check-label">
+                아이디 저장
+            </label>
         </div>
         <button class="btn btn-primary" type="submit">로그인</button>
         <a class="btn btn-secondary" href="{{ url_for('auth.signup') }}">회원가입</a>
     </form>
 </div>
+{% endblock %}
+
+{% block script %}
+    <script src="/static/js/savedId.js"></script>
 {% endblock %}
