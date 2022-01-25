@@ -12,7 +12,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
 
 from app import db
-from app.forms import UserCreateForm, UserSigninForm
+from app.forms import (
+    UserCreateForm,
+    UserSigninForm,
+    ChangePwForm,
+)
 from app.models import User
 
 
@@ -52,7 +56,6 @@ def signin():
     form = UserSigninForm()
 
     if request.method == 'POST' and form.validate_on_submit():
-        error = None
         user = User.query.filter_by(email=form.email.data).first()
         if not user or not check_password_hash(user.password, form.password.data):
             error = "아이디 혹은 비밀번호가 올바르지 않습니다."
@@ -69,6 +72,27 @@ def signout():
     session.clear()
 
     return redirect(url_for('main.main'))
+
+@bp.route('/change_pw/', methods=('GET', 'POST'))
+def change_pw():
+    if g.user == None:
+        # 로그인되지 않은 상태에는 비밀번호 변경 불가능
+        abort(404)
+
+    form = ChangePwForm()
+
+    if request.method == 'POST' and form.validate_on_submit():
+        user = User.query.get_or_404(g.user.id)
+
+        if check_password_hash(user.password, form.old_pw.data) is False:
+            error = "현재 비밀번호가 올바르지 않습니다."
+            flash(error)
+        else:
+            user.password = generate_password_hash(form.new_pw1.data)
+            db.session.commit()
+            return redirect(url_for('main.main'))
+
+    return render_template('auth/changepw.html', form=form)
 
 
 @bp.before_app_request
