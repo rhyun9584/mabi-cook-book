@@ -18,3 +18,10 @@ class UserCreateForm(FlaskForm):
 class UserSigninForm(FlaskForm):
     email = EmailField('이메일 ID', validators=[DataRequired(), Email()])
     password = PasswordField('비밀번호', validators=[DataRequired()])
+
+
+class ChangePwForm(FlaskForm):
+    old_pw = PasswordField('현재 비밀번호', validators=[DataRequired()])
+    new_pw1 = PasswordField('새 비밀번호', validators=[DataRequired(),
+                                                  EqualTo('new_pw2', '비밀번호가 일치하지 않습니다.'), Length(min=6)])
+    new_pw2 = PasswordField('새 비밀번호 확인', validators=[DataRequired()])
