@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container mx-1">
+        <nav class="navbar navbar-light border-bottom sticky-top">
+            <span class="navbar-text">총 {{ cook_list|length }}개</span>
+            <form class="form-inline">
+                <input type="search" class="form-control mr-sm-2" placeholder="검색">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+            </form>
+        </nav>
+        <div id="cook">
+            {% for cook, collect in zip(cook_list, collect_list) %}
+                <div id="cook{{ cook.id }}" class="bg-collect{{ collect.state }}">
+                    <span>{{ cook.name }}</span>
+                    <button class="btn">✔️</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="/static/js/book.js"></script>
+{% endblock %}

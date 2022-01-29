@@ -17,7 +17,7 @@ from app.forms import (
     UserSigninForm,
     ChangePwForm,
 )
-from app.models import User
+from app.models import User, Cook, Collect
 
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -39,6 +39,13 @@ def signup():
                         )
             db.session.add(user)
             db.session.commit()
+
+            # 유저의 collect 정보 init
+            cook_list = Cook.query.all()
+            for cook in cook_list:
+                collect = Collect(user=user.id, cook=cook.id)
+                db.session.add(collect)
+                db.session.commit()
 
             # 회원가입이 완료되면 로그인 페이지로 redirect
             return redirect(url_for('auth.signin'))
@@ -77,7 +84,8 @@ def signout():
 def change_pw():
     if g.user == None:
         # 로그인되지 않은 상태에는 비밀번호 변경 불가능
-        abort(404)
+        # abort(404)
+        return redirect(url_for('auth.signin'))
 
     form = ChangePwForm()
 
