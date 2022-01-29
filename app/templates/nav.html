@@ -5,6 +5,11 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('book.main') }}">도감</a>
+            </li>
+        </ul>
         <ul class="navbar-nav ml-auto justify-content-end">
             {% if g.user == None %}
                 <li class="nav-item">
