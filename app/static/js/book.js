@@ -22,8 +22,12 @@ for (i = 0; i < cook_list.length; i++){
             body: JSON.stringify(json)
         })
             .then(res => {
-                cook.classList.replace(cook.className, `bg-collect${new_state}`);
+                if (res.status === 200){
+                    cook.classList.replace(cook.className, `bg-collect${new_state}`);
+                } else {
+                    alert("서버와의 통신 에러가 발생하여 변경사항을 반영하지 못하였습니다.")
+                }
             })
-            .catch(error => alert("서버와의 통신 에러가 발생하여 변경사항을 반영하지 못하였습니다."))
+            .catch(err => console.error(err))
     });
 }
