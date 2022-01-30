@@ -15,7 +15,7 @@ def create_app():
     # app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
     # zip() 함수 사용을 위한 확장
-    app.jinja_env.globals.update(zip=zip)
+    app.jinja_env.globals.update(zip=zip, str=str)
 
     # DB connecting
     db.init_app(app)
