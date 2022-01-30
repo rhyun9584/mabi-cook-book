@@ -11,9 +11,21 @@
         </nav>
         <div id="cook">
             {% for cook, collect in zip(cook_list, collect_list) %}
-                <div id="cook{{ cook.id }}" class="bg-collect{{ collect.state }}">
-                    <span>{{ cook.name }}</span>
-                    <button class="btn">✔️</button>
+                <div id="cook{{ cook.id }}" class="cook-content bg-collect{{ collect.state }}">
+                    <div class="cook-image">
+                        <img src="/static/image/cook/{{ cook.name }}.png" alt="img">
+                    </div>
+                    <div class="cook-name">
+                        <span class="cook-eng-name">{{ cook.eng_name }}</span>
+                        <span class="cook-kor-name">{{ cook.name }}</span>
+                    </div>
+                    <div class="cook-detail">
+                        <span class="cook-method">{{ cook.method }}</span>
+                        <span class="cook-ingredients">{{ cook.ingredients }}</span>
+                    </div>
+                    <div class="cook-collect-btn">
+                        <button id="collect-btn" class="btn btn-outline-secondary">✔️</button>
+                    </div>
                 </div>
             {% endfor %}
         </div>
