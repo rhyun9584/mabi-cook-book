@@ -1,9 +1,9 @@
-const cook_list = document.querySelectorAll(`#cook div`);
+const cook_list = document.querySelectorAll(`#cook .cook-content`);
 
 for (i = 0; i < cook_list.length; i++){
     const cook = cook_list[i];
 
-    const btn = cook.querySelector("button");
+    const btn = cook.querySelector("#collect-btn");
     btn.addEventListener("click", function(){
         const state = parseInt(cook.className.substr(-1));
         const new_state = (state + 1) % 3;
@@ -23,7 +23,7 @@ for (i = 0; i < cook_list.length; i++){
         })
             .then(res => {
                 if (res.status === 200){
-                    cook.classList.replace(cook.className, `bg-collect${new_state}`);
+                    cook.classList.replace(`bg-collect${state}`, `bg-collect${new_state}`);
                 } else {
                     alert("서버와의 통신 에러가 발생하여 변경사항을 반영하지 못하였습니다.")
                 }
