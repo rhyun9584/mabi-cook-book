@@ -38,10 +38,10 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 59px;
+    min-width: 59px;
     /* top&bottom left&right*/
-    margin: 0rem 0.5rem;
-    background-color: #404040;
+    margin: 0 0.5rem;
+    background: radial-gradient(#606060, #404040);
     color: white;
 }
 
@@ -50,7 +50,7 @@ main {
     flex-direction: column;
     justify-content: center;
     text-align: right;
-    padding: 0rem 1rem;
+    padding: 0 1rem;
     min-width: 280px;
     border-right:1px solid lightgrey;
 }
