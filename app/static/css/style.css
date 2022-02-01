@@ -26,6 +26,10 @@ main {
     background-color: #FBE7A3;
 }
 
+.cook-nav{
+    padding-right: 0;
+}
+
 .cook-content{
     height: 76px;
     padding: 0.5rem;

@@ -1,15 +1,18 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <div class="container mx-1">
-        <nav class="navbar navbar-light border-bottom sticky-top">
+    <div class="container-lg book mx-1">
+        <nav class="navbar navbar-light border-bottom sticky-top cook-nav">
             <span class="navbar-text">총 {{ cook_list|length }}개</span>
-            <form class="form-inline">
-                <input type="search" class="form-control mr-sm-2" placeholder="검색">
+            <form class="form-inline" method="get" action="{{ url_for('book.main') }}">
+                <input type="search" class="form-control mr-sm-2" name="q" value="{{ query or '' }}" placeholder="음식 / 재료 검색">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
             </form>
         </nav>
         <div id="cook">
+            {% if cook_list|length == 0 %}
+                <h2 class="center">일치하는 결과가 없습니다.</h2>
+            {% endif %}
             {% for cook, collect in zip(cook_list, collect_list) %}
                 <div id="cook{{ cook.id }}" class="cook-content bg-collect{{ collect.state }}">
                     <div class="cook-image">

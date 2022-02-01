@@ -8,6 +8,7 @@ from flask import (
     request,
     Response,
 )
+from sqlalchemy import or_, and_
 
 from app import db
 from app.models import Cook, User, Collect
@@ -22,10 +23,18 @@ def main():
         flash("도감 페이지를 이용하기 위해서는 로그인이 필요합니다.")
         return redirect(url_for('auth.signin'))
 
-    cook_list = Cook.query.all()
-    collect_list = Collect.query.filter_by(user=g.user.id).all()
+    query = request.args.get('q', type=str, default='')
 
-    return render_template('book/book.html', cook_list=cook_list, collect_list=collect_list)
+    if query:
+        cook_list = Cook.query.filter(or_(Cook.name.like(f'%{query}%'), Cook.ingredients.like(f'%{query}%'))).all()
+
+        cook_id_list = [i.id for i in cook_list]
+        collect_list = Collect.query.filter(and_(Collect.user == g.user.id, Collect.cook.in_(cook_id_list))).all()
+    else:
+        cook_list = Cook.query.all()
+        collect_list = Collect.query.filter_by(user=g.user.id).all()
+
+    return render_template('book/book.html', cook_list=cook_list, collect_list=collect_list, query=query)
 
 
 @bp.route('/change_state/', methods=('POST',))
