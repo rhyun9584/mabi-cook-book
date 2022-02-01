@@ -7,6 +7,7 @@ from flask import (
     flash,
     request,
     Response,
+    make_response,
 )
 from sqlalchemy import or_, and_
 
@@ -24,9 +25,15 @@ def main():
         return redirect(url_for('auth.signin'))
 
     query = request.args.get('q', type=str, default='')
+    range = request.args.get('r', type=str, default='all')
 
     if query:
-        cook_list = Cook.query.filter(or_(Cook.name.like(f'%{query}%'), Cook.ingredients.like(f'%{query}%'))).all()
+        if range == 'name':
+            cook_list = Cook.query.filter(Cook.name.like(f'%{query}%')).all()
+        elif range == 'ingredients':
+            cook_list = Cook.query.filter(Cook.ingredients.like(f'%{query}%')).all()
+        else:
+            cook_list = Cook.query.filter(or_(Cook.name.like(f'%{query}%'), Cook.ingredients.like(f'%{query}%'))).all()
 
         cook_id_list = [i.id for i in cook_list]
         collect_list = Collect.query.filter(and_(Collect.user == g.user.id, Collect.cook.in_(cook_id_list))).all()
@@ -34,7 +41,10 @@ def main():
         cook_list = Cook.query.all()
         collect_list = Collect.query.filter_by(user=g.user.id).all()
 
-    return render_template('book/book.html', cook_list=cook_list, collect_list=collect_list, query=query)
+    resp = make_response(render_template('book/book.html', cook_list=cook_list,
+                                         collect_list=collect_list, query=query, range=range))
+    resp.set_cookie('range', range)
+    return resp
 
 
 @bp.route('/change_state/', methods=('POST',))

@@ -31,3 +31,25 @@ for (i = 0; i < cook_list.length; i++){
             .catch(err => console.error(err))
     });
 }
+
+function getCookie(cookieName){
+    cookieName = cookieName + '=';
+    const cookieData = document.cookie;
+    let start = cookieData.indexOf(cookieName);
+
+    let cookieValue = '';
+    if(start !== -1){
+        start += cookieName.length;
+        let end = cookieData.indexOf(';', start);
+
+        if (end === -1) end = cookieData.length;
+        cookieValue = cookieData.substring(start, end);
+    }
+    return unescape(cookieValue);
+}
+
+// range 선택
+$(document).ready(function(){
+    const range = getCookie('range');
+    $('#r').val(range).prop("selected", true);
+});
