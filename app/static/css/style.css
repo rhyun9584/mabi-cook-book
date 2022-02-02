@@ -87,3 +87,14 @@ main {
     align-items: center;
     margin-left: auto;
 }
+
+.modal-cook{
+    max-width: 650px;
+}
+.cook-filter{
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex{
+    flex: 1 0 21%;
+}

@@ -1,0 +1,55 @@
+<div class="modal" id="cook-filter">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-cook">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">필터</h4>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="font-weight-bold">방법</div>
+                <hr class="my-2">
+                <div class="custom-checkbox custom-control cook-filter">
+                    <div class="mb-1 flex">
+                        <input type="checkbox" class="form-check-input" id="method-all" checked>
+                        <label for="method-all" class="form-check-label">전체</label>
+                    </div>
+                    {% for method in method_list %}
+                    <div class="mb-1 flex">
+                        <input type="checkbox" class="form-check-input method-filter" id="{{ method.name }}" checked>
+                        <label for="{{ method.name }}" class="form-check-label">{{ str(method) }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="mt-3 font-weight-bold">획득 현황</div>
+                <hr class="my-2">
+                <div class="custom-control custom-checkbox cook-filter">
+                    <div class="mb-2 flex">
+                        <input type="checkbox" class="form-check-input" id="collected-all" checked>
+                        <label for="collected-all" class="form-check-label">전체</label>
+                    </div>
+                    <div class="mb-2 flex">
+                        <input type="checkbox" class="form-check-input collected-filter" id="collected0" checked>
+                        <label for="collected0" class="form-check-label">미수집</label>
+                    </div>
+                    <div class="mb-2 flex">
+                        <input type="checkbox" class="form-check-input collected-filter" id="collected1" checked>
+                        <label for="collected1" class="form-check-label">수집</label>
+                    </div>
+                    <div class="mb-2 flex">
+                        <input type="checkbox" class="form-check-input collected-filter" id="collected2" checked>
+                        <label for="collected2" class="form-check-label">5성 수집</label>
+                    </div>
+                </div>
+{#                <div class="custom-checkbox custom-control cook-filter">#}
+{#                    <div class="mt-4 flex">#}
+{#                        <input type="checkbox" class="form-check-input" id="can-buy">#}
+{#                        <label for="can-buy">재료를 전부 상점에서 구매 가능한 요리만 보기</label>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-block btn-success">필터 적용</button>
+            </div>
+        </div>
+    </div>
+</div>
