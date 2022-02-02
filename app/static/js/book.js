@@ -60,24 +60,12 @@ function getStateIcon(state){
     return icon
 }
 
-function getCookie(cookieName){
-    cookieName = cookieName + '=';
-    const cookieData = document.cookie;
-    let start = cookieData.indexOf(cookieName);
-
-    let cookieValue = '';
-    if(start !== -1){
-        start += cookieName.length;
-        let end = cookieData.indexOf(';', start);
-
-        if (end === -1) end = cookieData.length;
-        cookieValue = cookieData.substring(start, end);
-    }
-    return unescape(cookieValue);
-}
-
 // range 선택
-$(document).ready(function(){
-    const range = getCookie('range');
+window.addEventListener("pageshow", function (){
+    const params = new URLSearchParams(window.location.search);
+
+    let range = params.get('r');
+    if(range === null){ range = 'all'; }
+
     $('#r').val(range).prop("selected", true);
-});
+})

@@ -31,7 +31,8 @@ def main():
     collected = request.args.get('c', type=str, default='')
 
     # Cook 모델과 Collect join 및 user 필터링
-    join_query = db.session.query(Cook, Collect).join(Collect, Collect.cook == Cook.id).filter(Collect.user == g.user.id)
+    join_query = db.session.query(Cook, Collect).join(Collect, Collect.cook == Cook.id)\
+        .filter(Collect.user == g.user.id)
 
     # Cook 모델 필터링
     if query:

@@ -65,52 +65,60 @@ filter_btn.addEventListener("click", function (){
     location.href = `http://127.0.0.1:5000/book/?r=${range}&q=${query}&m=${method_query}&c=${collected_query}`;
 })
 
-// function getCookie(cookieName){
-//     cookieName = cookieName + '=';
-//     const cookieData = document.cookie;
-//     let start = cookieData.indexOf(cookieName);
-//
-//     let cookieValue = '';
-//     if(start !== -1){
-//         start += cookieName.length;
-//         let end = cookieData.indexOf(';', start);
-//
-//         if (end === -1) end = cookieData.length;
-//         cookieValue = cookieData.substring(start, end);
-//     }
-//     return unescape(cookieValue);
-// }
-//
-// $(document).ready(function (){
-//     // 캐싱된 method, collected 필터 적용 상태 반영
-//     const all_method = document.querySelector("#method-all");
-//     const all_collected = document.querySelector("#collected-all");
-//
-//     const method = getCookie('method');
-//     if (method !== ''){
-//         let method_list = method.split(" ");
-//         console.log(method_list)
-//         method_list.pop();
-//         console.log(method_list)
-//
-//         const method_check_list = document.querySelectorAll(".method-filter");
-//         const unchecked_list = Array.from(method_check_list).filter(x => !method_list.includes(x.id));
-//
-//         for (unchecked of unchecked_list){
-//             unchecked.checked = false;
-//         }
-//
-//         all_method.checked = false;
-//     }
-//
-//     const collected = getCookie('collected');
-//     if (collected !== ''){
-//         let collected_list = collected.split(" ");
-//         collected_list.pop();
-//     }
-//
-//     if(all_method.checked === false || all_collected.checked === false){
-//         const filter_btn = document.querySelector("#filter-btn");
-//         filter_btn.classList.replace("btn-outline-info", "btn-info");
-//     }
-// })
+
+// method, collected 필터 적용 상태 반영
+window.addEventListener("pageshow", function (){
+    const method_all = document.querySelector("#method-all");
+    const collected_all = document.querySelector("#collected-all");
+
+    const params = new URLSearchParams(window.location.search);
+
+    // method 필터 상태 반영
+    const method = params.get('m');
+    if (method !== null && method !== ''){
+        const param_list = method.split(" ");
+        param_list.pop();
+
+        const method_list = document.querySelectorAll(".method-filter");
+        const unchecked_list = Array.from(method_list).filter(x => !param_list.includes(x.id));
+
+        for (unchecked of unchecked_list){
+            unchecked.checked = false;
+        }
+        method_all.checked = false;
+    }
+    else if (!method_all.checked){
+        method_all.checked = true;
+
+        const e = new Event('change');
+        method_all.dispatchEvent(e);
+    }
+
+    // collected 필터 상태 반영
+    const collected = params.get('c');
+    if (collected !== null && collected !== ''){
+        const param_list = collected.split(" ");
+
+        console.log(param_list);
+        const collected_list = document.querySelectorAll(".collected-filter");
+        const unchecked_list = Array.from(collected_list).filter(x => !param_list.includes(x.id.substr(-1)));
+
+        console.log(unchecked_list);
+        for (unchecked of unchecked_list){
+            unchecked.checked = false;
+        }
+        collected_all.checked = false;
+    }
+    else if (!collected_all.checked){
+        collected_all.checked = true;
+
+        const e = new Event('change');
+        collected_all.dispatchEvent(e);
+    }
+
+    // 필터 적용시 필터 버튼 표시 변경
+    if(method_all.checked === false || collected_all.checked === false){
+        const filter_btn = document.querySelector("#filter-btn");
+        filter_btn.classList.replace("btn-outline-info", "btn-info");
+    }
+})
