@@ -9,6 +9,12 @@ main {
     transform: translate(-50%, -50%);
 }
 
+@media (max-width:711px) {
+    .book{
+        /*  페이지 디자인 필요 */
+    }
+}
+
 .form-signin{
     width: 100%;
     max-width: 420px;
