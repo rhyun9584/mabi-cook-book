@@ -61,13 +61,3 @@ function getStateIcon(state){
 
     return icon
 }
-
-// range 선택
-window.addEventListener("pageshow", function (){
-    const params = new URLSearchParams(window.location.search);
-
-    let range = params.get('r');
-    if(range === null){ range = 'all'; }
-
-    $('#r').val(range).prop("selected", true);
-})

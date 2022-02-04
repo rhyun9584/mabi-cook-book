@@ -5,7 +5,7 @@
         <nav class="navbar navbar-light border-bottom sticky-top cook-nav">
             <span class="navbar-text">총 <span class="text-dark">{{ join_list|length }}</span>개</span>
             <button class="btn btn-outline-info ml-auto mr-3" id="filter-btn" data-toggle="modal" data-target="#cook-filter"><i class="bi bi-funnel"></i></button>
-            <form class="form-inline" method="get" action="{{ url_for('book.main') }}">
+            <form class="form-inline" id="search-form" method="get" action="{{ url_for('book.main') }}">
                 <div class="form-group mr-1">
                     <select name="r" id="r" class="form-control">
                         <option value="all">전체</option>
@@ -47,6 +47,7 @@
 {% endblock %}
 
 {% block script %}
-    <script src="/static/js/book.js"></script>
+    <script src="/static/js/state_change.js"></script>
     <script src="/static/js/filter.js"></script>
+    <script src="/static/js/search.js"></script>
 {% endblock %}
