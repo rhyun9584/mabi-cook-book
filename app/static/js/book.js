@@ -1,5 +1,7 @@
 const cook_list = document.querySelectorAll(`#cook .cook-content`);
 
+const STATE_CHANGE_API = 'http://127.0.0.1:5000/book/change_state/';
+
 for (i = 0; i < cook_list.length; i++){
     const cook = cook_list[i];
 
@@ -22,7 +24,7 @@ for (i = 0; i < cook_list.length; i++){
             "new_state": new_state,
         }
 
-        fetch('http://127.0.0.1:5000/book/change_state/', {
+        fetch(STATE_CHANGE_API, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
