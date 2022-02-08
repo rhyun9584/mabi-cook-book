@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_admin import Admin
 
 import config
 
@@ -27,6 +28,14 @@ def create_app():
     app.register_blueprint(main_views.bp)
     app.register_blueprint(auth_views.bp)
     app.register_blueprint(book_views.bp)
+
+    # flask-admin
+    admin = Admin(app)
+
+    from .views.admin_view import UserModelView, CookModelView, CollectModelView
+    admin.add_view(UserModelView(models.User, db.session))
+    admin.add_view(CookModelView(models.Cook, db.session))
+    admin.add_view(CollectModelView(models.Collect, db.session))
 
     @app.errorhandler(404)
     def page_not_found(error):
