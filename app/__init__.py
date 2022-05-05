@@ -32,7 +32,7 @@ def create_app():
     # flask-admin
     admin = Admin(app)
 
-    from .views.admin_view import UserModelView, CookModelView, CollectModelView
+    from .views.admin_views import UserModelView, CookModelView, CollectModelView
     admin.add_view(UserModelView(models.User, db.session))
     admin.add_view(CookModelView(models.Cook, db.session))
     admin.add_view(CollectModelView(models.Collect, db.session))
