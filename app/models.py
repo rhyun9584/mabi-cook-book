@@ -14,7 +14,7 @@ class User(db.Model):
 
 class Cook(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
+    name = db.Column(db.String(50), nullable=False)
     eng_name = db.Column(db.String(100), nullable=False)
     method = db.Column(db.Enum(Method), nullable=False)
     ingredients = db.Column(db.String(200), nullable=False)
