@@ -20,7 +20,7 @@ for (i = 0; i < cook_list.length; i++){
 
         // db 정보 업데이트
         const json = {
-            "cook_id": parseInt(cook.id.substr(-1)),
+            "cook_id": parseInt(cook.id.substr(4)),
             "new_state": new_state,
         }
 
