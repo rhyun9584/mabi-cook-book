@@ -25,9 +25,9 @@
             {% endif %}
             {% for cook, collect in join_list %}
                 <div id="cook{{ cook.id }}" class="cook-content bg-collect{{ collect.state }}">
-{#                    <div class="cook-image">#}
-{#                        <img src="/static/image/cook/{{ cook.name }}.png" alt="img">#}
-{#                    </div>#}
+                    <div class="cook-image">
+                        <img src="/static/image/cook/{{ cook.name }}.png" onerror="this.src='/static/image/question_mark2.png'">
+                    </div>
                     <div class="cook-name">
                         <span class="cook-eng-name">{{ cook.eng_name }}</span>
                         <span class="cook-kor-name">{{ cook.name }}</span>
