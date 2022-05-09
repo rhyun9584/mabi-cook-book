@@ -23,8 +23,19 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="name">닉네임</label>
-            <input type="text" name="name" id="name" class="form-control" placeholder="닉네임" value="{{ form.name.data or '' }}">
+            <label for="name">서버<b>@</b>닉네임</label>
+            <div class="input-group mb-3">
+                <select name="server" id="server" class="form-control">
+                    <option value="류트">류트</option>
+                    <option value="하프">하프</option>
+                    <option value="울프">울프</option>
+                    <option value="만돌린">만돌린</option>
+                </select>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                </div>
+                <input type="text" name="name" id="name" class="form-control" placeholder="닉네임" value="{{ form.name.data or '' }}">
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">가입</button>
     </form>
