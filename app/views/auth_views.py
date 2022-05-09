@@ -70,6 +70,10 @@ def signin():
         else:
             session.clear()
             session['user_id'] = user.id
+
+            next = request.form.get("next")
+            if next:
+                return redirect(next)
             return redirect(url_for('main.main'))
 
     return render_template('auth/signin.html', form=form)

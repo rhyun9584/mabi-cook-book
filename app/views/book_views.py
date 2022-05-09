@@ -23,7 +23,7 @@ def main():
     if g.user == None:
         # 로그인 해야지만 도감 페이지에 접근 가능
         flash("도감 페이지를 이용하기 위해서는 로그인이 필요합니다.")
-        return redirect(url_for('auth.signin'))
+        return redirect(url_for('auth.signin', next=request.url))
 
     query = request.args.get('q', type=str, default='')
     range = request.args.get('r', type=str, default='all')

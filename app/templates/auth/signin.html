@@ -3,6 +3,7 @@
 <div class="container">
     <form method="post" class="jumbotron form-signin center">
         {{ form.csrf_token }}
+        <input type="hidden" name="next" value="{{ request.args.get('next', '') }}"/>
         <h3 class="form-header">로그인</h3>
         {% include "form_errors.html" %}
         <div class="form-group">
