@@ -13,6 +13,7 @@ class UserCreateForm(FlaskForm):
     password1 = PasswordField('비밀번호', validators=[
         DataRequired(), EqualTo('password2', '비밀번호가 일치하지 않습니다.'), Length(min=6)])
     password2 = PasswordField('비밀번호 확인', validators=[DataRequired()])
+    server = SelectField('서버', choices=['류트', '하프', '울프', '만돌린'])
     name = StringField('닉네임', validators=[DataRequired()])
 
 
