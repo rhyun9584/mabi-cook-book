@@ -24,3 +24,10 @@ class Collect(db.Model):
     cook = db.Column(db.ForeignKey('cook.id', ondelete='CASCADE'), nullable=False, primary_key=True)
     # 수집 상태 || 0: 미수집, 1: 수집, 2: 5성 수집
     state = db.Column(TINYINT, nullable=False, default=0)
+
+
+class ResetPw(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
+    addr = db.Column(db.String(36), nullable=False, unique=True)
+    is_expired = db.Column(db.Boolean(), nullable=False, default=False)

@@ -8,6 +8,7 @@ from flask import (
     g,
     abort,
 )
+from uuid import uuid4
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
 
@@ -16,8 +17,12 @@ from app.forms import (
     UserCreateForm,
     UserSigninForm,
     ChangePwForm,
+    SearchPwForm,
+    ResetPwForm,
 )
-from app.models import User, Cook, Collect
+from app.models import User, Cook, Collect, ResetPw
+
+from tasks import mail_send
 
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -106,6 +111,55 @@ def change_pw():
 
     return render_template('auth/changepw.html', form=form)
 
+@bp.route('/search_pw/', methods=('GET', 'POST'))
+def search_pw():
+    if g.user:
+        return abort(404)
+
+    form = SearchPwForm()
+
+    if request.method == 'POST' and form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        uuid = str(uuid4())
+
+        duplicate = ResetPw.query.filter_by(addr=uuid).first()
+        while duplicate is not None:
+            uuid = str(uuid4())
+            duplicate = ResetPw.query.filter_by(addr=uuid).first()
+
+        page = ResetPw(
+            user=user.id,
+            addr=uuid,
+        )
+        db.session.add(page)
+        db.session.commit()
+
+        mail_send.delay(user.email, uuid)
+
+        return render_template('auth/sending_email.html')
+
+    return render_template('auth/searchpw.html', form=form)
+
+@bp.route('/reset_pw/<uuid>/', methods=('GET', 'POST'))
+def reset_pw(uuid):
+    # 비밀번호 찾기 로직을 통해 받은 이메일 링크를 통해 비밀번호 변경
+    page = ResetPw.query.filter_by(addr=uuid).first()
+    if page is None or page.is_expired == True:
+        return abort(404)
+
+    form = ResetPwForm()
+
+    if request.method == 'POST' and form.validate_on_submit():
+        user = User.query.get(page.user)
+        user.password = generate_password_hash(form.new_pw1.data)
+
+        # 한 번 비밀번호 변경에 사용된 페이지는 바로 expired
+        page.is_expired = True
+
+        db.session.commit()
+        return render_template('auth/complete_resetpw.html')
+
+    return render_template('auth/resetpw.html', form=form)
 
 @bp.before_app_request
 def load_logged_in_user():

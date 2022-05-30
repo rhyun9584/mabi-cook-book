@@ -2,11 +2,16 @@ from flask import Flask, render_template
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
+from flask_mail import Mail
+from celery import Celery
 
 import config
 
+
 db = SQLAlchemy()
 migrate = Migrate()
+mail = Mail()
+celery = Celery('__name__', broker='amqp://localhost//')
 
 def create_app():
     app = Flask(__name__)
@@ -36,6 +41,19 @@ def create_app():
     # admin.add_view(UserModelView(models.User, db.session))
     # admin.add_view(CookModelView(models.Cook, db.session))
     # admin.add_view(CollectModelView(models.Collect, db.session))
+
+    # flask-mail
+    mail.init_app(app)
+
+    # celery
+    celery.conf.update(app.config)
+
+    class ContextTask(celery.Task):
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return self.run(*args, **kwargs)
+
+    celery.Task = ContextTask
 
     @app.errorhandler(404)
     def page_not_found(error):

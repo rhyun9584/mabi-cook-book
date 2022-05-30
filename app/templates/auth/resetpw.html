@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+    <form method="post" class="form jumbotron">
+        {{ form.csrf_token }}
+        <h3 class="form-header">비밀번호 변경</h3>
+        {% include "form_errors.html" %}
+        <div class="form-group">
+            <div>
+                <label for="new_pw1">새 비밀번호</label>
+                <input type="password" name="new_pw1" id="new_pw1" class="form-control" placeholder="새 비밀번호">
+                <small class="text-muted">6자 이상</small>
+            </div>
+            <div>
+                <label for="new_pw2">새 비밀번호 확인</label>
+                <input type="password" name="new_pw2" id="new_pw2" class="form-control" placeholder="새 비밀번호 확인">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">비밀번호 변경</button>
+    </form>
+</div>
+{% endblock %}
