@@ -104,3 +104,8 @@ main {
 .flex{
     flex: 1 0 21%;
 }
+
+@font-face {
+    font-family: 'mabi';
+    src: url('../font/Mabinogi_Classic_OTF.otf') format('truetype');
+}
