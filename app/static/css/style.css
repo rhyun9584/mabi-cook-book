@@ -105,6 +105,10 @@ main {
     flex: 1 0 21%;
 }
 
+.txt-hlight{
+    background: rgba(184, 203, 248, .7);
+}
+
 @font-face {
     font-family: 'mabi';
     src: url('../font/Mabinogi_Classic_OTF.otf') format('truetype');

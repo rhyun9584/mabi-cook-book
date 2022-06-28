@@ -25,12 +25,25 @@ function createHiddenInput(name, value){
     return element;
 }
 
-// range 선택
 window.addEventListener("pageshow", function (){
     const params = new URLSearchParams(window.location.search);
 
+    // range 선택
     let range = params.get('r');
     if(range === null){ range = 'all'; }
 
     $('#r').val(range).prop("selected", true);
+
+    // 검색어 하이라이팅
+    const search = params.get('q');
+
+    let class_range = ''
+    if (range === 'all') { class_range='.cook-kor-name, .cook-ingredients' }
+    else if (range === 'name'){ class_range = '.cook-kor-name' }
+    else if (range === 'ingredients'){ class_range = '.cook-ingredients'}
+
+    $(`${class_range}:contains('${search}')`).each(function () {
+        var regex = new RegExp(search,'g');
+        $(this).html( $(this).text().replace(regex, `<span class='txt-hlight'>${search}</span>`) );
+    });
 })
