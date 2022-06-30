@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container">
-    <form method="post" class="form jumbotron">
+    <form method="post" id="searchpw-form" class="form jumbotron">
         {{ form.csrf_token }}
         <h3 class="form-header">비밀번호 찾기</h3>
         {% include "form_errors.html" %}
@@ -14,4 +14,8 @@
         <button type="submit" class="btn btn-primary">비밀번호 찾기</button>
     </form>
 </div>
+{% endblock %}
+
+{% block script %}
+    <script src="/static/js/validate.js"></script>
 {% endblock %}

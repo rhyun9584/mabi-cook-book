@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container">
-    <form method="post" class="form jumbotron">
+    <form method="post" id="signup-form" class="form jumbotron">
         {{ form.csrf_token }}
         <h3 class="form-header">회원가입</h3>
         {% include "form_errors.html" %}
@@ -13,12 +13,10 @@
         </div>
         <div class="form-group">
             <div>
-                <label for="password1">비밀번호</label>
+                <label for="password1">비밀번호 (6자 이상)</label>
                 <input type="password" name="password1" id="password1" class="form-control" placeholder="비밀번호" value="{{ form.password1.data or '' }}">
-                <small class="form-text text-muted">6자 이상</small>
             </div>
             <div>
-                <label for="password2">비밀번호 확인</label>
                 <input type="password" name="password2" id="password2" class="form-control" placeholder="비밀번호 확인" value="{{ form.password2.data or '' }}">
             </div>
         </div>
@@ -26,6 +24,7 @@
             <label for="name">서버<b>@</b>닉네임</label>
             <div class="input-group mb-3">
                 <select name="server" id="server" class="form-control">
+                    <option value="">서버를 선택하세요.</option>
                     <option value="류트">류트</option>
                     <option value="하프">하프</option>
                     <option value="울프">울프</option>
@@ -40,4 +39,8 @@
         <button type="submit" class="btn btn-primary">가입</button>
     </form>
 </div>
+{% endblock %}
+
+{% block script %}
+    <script src="/static/js/validate.js"></script>
 {% endblock %}

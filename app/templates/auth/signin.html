@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="container">
-    <form method="post" class="jumbotron form-signin center">
+    <form method="post" id="signin-form" class="jumbotron center">
         {{ form.csrf_token }}
         <input type="hidden" name="next" value="{{ request.args.get('next', '') }}"/>
         <h3 class="form-header">로그인</h3>
@@ -31,4 +31,5 @@
 
 {% block script %}
     <script src="/static/js/save-id.js"></script>
+    <script src="/static/js/validate.js"></script>
 {% endblock %}
