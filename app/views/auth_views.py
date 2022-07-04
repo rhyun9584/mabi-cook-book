@@ -19,6 +19,7 @@ from app.forms import (
     ChangePwForm,
     SearchPwForm,
     ResetPwForm,
+    LeaveForm,
 )
 from app.models import User, Cook, Collect, ResetPw
 
@@ -99,7 +100,7 @@ def change_pw():
     form = ChangePwForm()
 
     if request.method == 'POST' and form.validate_on_submit():
-        user = User.query.get_or_404(g.user.id)
+        user = g.user
 
         if check_password_hash(user.password, form.old_pw.data) is False:
             error = "현재 비밀번호가 올바르지 않습니다."
@@ -160,6 +161,29 @@ def reset_pw(uuid):
         return render_template('auth/complete_resetpw.html')
 
     return render_template('auth/resetpw.html', form=form)
+
+@bp.route('/leave/', methods=('GET', 'POST'))
+def leave():
+    if g.user == None:
+        # 로그인하지 않은 채로 회원탈퇴 불가능
+        abort(404)
+
+    form = LeaveForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        user = g.user
+
+        if not check_password_hash(user.password, form.password.data):
+            error = "비밀번호가 올바르지 않습니다."
+            flash(error)
+        else:
+            db.session.delete(user)
+            db.session.commit()
+
+            session.clear()
+
+            return render_template('auth/after_leave.html')
+
+    return render_template('auth/leave.html', form=form)
 
 @bp.before_app_request
 def load_logged_in_user():

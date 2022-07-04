@@ -46,3 +46,7 @@ class SearchPwForm(FlaskForm):
 class ResetPwForm(FlaskForm):
     new_pw1 = PasswordField('새 비밀번호')
     new_pw2 = PasswordField('새 비밀번호 확인')
+
+
+class LeaveForm(FlaskForm):
+    password = PasswordField('비밀번호')

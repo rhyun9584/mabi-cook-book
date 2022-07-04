@@ -133,3 +133,12 @@ $("#resetpw-form").validate({
         },
     }
 });
+
+$("#leave-form").validate({
+    rules: {
+        password: { required: true },
+    },
+    messages: {
+        password: { required: "* 비밀번호를 입력해주세요." },
+    },
+});
