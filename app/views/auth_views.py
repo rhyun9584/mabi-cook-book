@@ -11,6 +11,7 @@ from flask import (
 from uuid import uuid4
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
+from sqlalchemy import func
 
 from app import db
 from app.forms import (
@@ -184,6 +185,19 @@ def leave():
             return render_template('auth/after_leave.html')
 
     return render_template('auth/leave.html', form=form)
+
+@bp.route('/info/', methods=('GET',))
+def info():
+    if g.user == None:
+        abort(404)
+
+    collects = Collect.query.with_entities(Collect.state, func.count(Collect.state)).group_by(Collect.state).all()
+
+    state_count = {}
+    for co in collects:
+        state_count[co[0]] = co[1]
+
+    return render_template('auth/info.html', count=state_count)
 
 @bp.before_app_request
 def load_logged_in_user():

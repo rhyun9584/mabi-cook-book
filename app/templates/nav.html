@@ -20,7 +20,7 @@
                 </li>
             {% else %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('auth.change_pw') }}">{{ g.user.name }}</a>
+                    <a class="nav-link" href="{{ url_for('auth.info') }}">{{ g.user.name }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('auth.signout') }}">로그아웃</a>

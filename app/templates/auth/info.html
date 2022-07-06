@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container mt-4 d-flex">
+        <div class="d-flex flex-column">
+            <h3 class="pt-3 pl-3" style="font-family: mabi">{{ g.user.name }}</h3>
+            <div class="pt-3 d-flex flex-column mt-auto">
+                <button class="btn btn-primary"
+                        onclick="location.href = '{{ url_for('auth.change_pw') }}'">비밀번호 변경</button>
+                <button class="btn btn-danger mt-sm-1"
+                        onclick="location.href = '{{ url_for('auth.leave') }}'">회원탈퇴</button>
+            </div>
+        </div>
+        <div class="ml-auto mr-auto">
+            <canvas id="bookChart" class="mb-3" width="400" height="400"></canvas>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        const state0 = {{ count[0] }}
+        const state1 = {{ count[1] }}
+        const state2 = {{ count[2] }}
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+    <script src="/static/js/chart.js"></script>
+{% endblock %}
