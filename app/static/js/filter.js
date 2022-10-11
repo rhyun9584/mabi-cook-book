@@ -99,11 +99,9 @@ window.addEventListener("pageshow", function (){
     if (collected !== null && collected !== ''){
         const param_list = collected.split(" ");
 
-        console.log(param_list);
         const collected_list = document.querySelectorAll(".collected-filter");
         const unchecked_list = Array.from(collected_list).filter(x => !param_list.includes(x.id.substr(-1)));
 
-        console.log(unchecked_list);
         for (unchecked of unchecked_list){
             unchecked.checked = false;
         }
