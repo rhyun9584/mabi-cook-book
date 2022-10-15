@@ -62,7 +62,9 @@ filter_btn.addEventListener("click", function (){
     // 검색조건 유지
     const range = $("#r option:selected").val();
     const query = $("input[name=q]").val();
-    location.href = `http://127.0.0.1:5000/book/?r=${range}&q=${query}&m=${method_query}&c=${collected_query}`;
+
+    const current_origin_url = window.location.origin;
+    location.href = current_origin_url+`/book/?r=${range}&q=${query}&m=${method_query}&c=${collected_query}`;
 })
 
 

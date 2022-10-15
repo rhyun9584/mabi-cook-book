@@ -7,10 +7,10 @@ from app.models import ResetPw
 
 
 @celery.task
-def mail_send(receive, uuid):
+def mail_send(receive, origin_url, uuid):
     msg = Message()
     msg.subject = 'password reset link'
-    msg.body = f'http://127.0.0.1:5000/auth/reset_pw/{uuid}/'
+    msg.body = f"{origin_url}auth/reset_pw/{uuid}/"
     msg.recipients = [receive, ]
     msg.sender = 'rhyun95@gmail.com'
 

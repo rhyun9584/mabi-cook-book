@@ -136,7 +136,9 @@ def search_pw():
         db.session.add(page)
         db.session.commit()
 
-        mail_send.delay(user.email, uuid)
+        origin_url = request.url_root
+
+        mail_send.delay(user.email, origin_url, uuid)
 
         return render_template('auth/sending_email.html')
 
