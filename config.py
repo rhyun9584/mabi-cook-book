@@ -19,7 +19,7 @@ SECRET_KEY = os.urandom(32)
 # 이메일 전송을 위한 설정
 MAIL_SERVER = 'smtp.gmail.com'
 MAIL_PORT = 587
-MAIL_USERNAME = os.environ.get("MAIL_USERNAME"),
-MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD"),
+MAIL_USERNAME = "".join(os.environ.get("MAIL_USERNAME"))
+MAIL_PASSWORD = "".join(os.environ.get("MAIL_PASSWORD"))
 MAIL_USE_TLS = True
 MAIL_USE_SSL = False
