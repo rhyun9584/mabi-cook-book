@@ -31,6 +31,10 @@ Python, Flask, celery, MySQL, git
 * 음식 이름 혹은 재료 이름에 따라 검색하거나, 요리 방법 혹은 수집 상태에 따라 필터링 가능
 <img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/003440ca-2efe-4930-8f99-da588a33ce97/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221017%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221017T122800Z&X-Amz-Expires=86400&X-Amz-Signature=df9eab5c7fce2b47ff17dbbae5653c53270241a71dd5d79bbb584205615b74a9&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject">
 
+## 추가 구현 필요
+* 새로 요리 항목을 추가하는 admin site
+* 띄어쓰기 무관 검색
+
 ## 기타
 * Notion 이슈 보드
 https://rhyun9584.notion.site/61d869d022e6467fb73baebba871da8f?v=292df6caab7f4997a6d2b8f861e9d492
