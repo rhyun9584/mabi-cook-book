@@ -23,13 +23,13 @@ Python, Flask, celery, MySQL, git
 
 ## 사이트
 * 회원가입, 로그인, 로그아웃, 비밀번호 찾기, 아이디 저장 등의 유저 시스템
-<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/51731c69-bb4b-4460-b7d2-2c2888935ce9/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221017%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221017T122945Z&X-Amz-Expires=86400&X-Amz-Signature=4f499a98a5cf0919abe25ae99e5047119e95f72002a37694cf648bc5870a5018&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject">
+<img src="https://user-images.githubusercontent.com/45452033/196888919-faed5bb0-bc3b-4c13-b99e-6aa3e208c998.png">
 
 * 게임 속 요리 항목을 미수집/수집/5성 수집 3가지의 수집 상태로 기록 가능
-<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/524ac15e-6a28-40b5-a489-f85c3c9eed75/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221017%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221017T122331Z&X-Amz-Expires=86400&X-Amz-Signature=85ec1399b04f5e9290c8d34820f4a41c5f2963225a70155158939bc598bd3564&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject">
+<img src="https://user-images.githubusercontent.com/45452033/196888561-a1bc5fad-2802-43b2-929d-5eb89e562a18.png">
 
 * 음식 이름 혹은 재료 이름에 따라 검색하거나, 요리 방법 혹은 수집 상태에 따라 필터링 가능
-<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/003440ca-2efe-4930-8f99-da588a33ce97/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221017%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221017T122800Z&X-Amz-Expires=86400&X-Amz-Signature=df9eab5c7fce2b47ff17dbbae5653c53270241a71dd5d79bbb584205615b74a9&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject">
+<img src="https://user-images.githubusercontent.com/45452033/196889194-699cc31f-c33a-4325-88c8-38e2725757b9.png">
 
 ## 추가 구현 필요
 * 새로 요리 항목을 추가하는 admin site
