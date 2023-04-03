@@ -195,7 +195,7 @@ def info():
 
     collects = Collect.query.with_entities(Collect.state, func.count(Collect.state)).group_by(Collect.state).all()
 
-    state_count = {}
+    state_count = {0: 0, 1: 0, 2: 0}
     for co in collects:
         state_count[co[0]] = co[1]
 
