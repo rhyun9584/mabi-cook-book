@@ -182,7 +182,9 @@ def leave():
             db.session.delete(user)
             db.session.commit()
 
+            # 로그아웃을 위해 session을 비운 후, g 객체의 유저 정보를 지움
             session.clear()
+            g.user = None
 
             return render_template('auth/after_leave.html')
 
