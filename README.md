@@ -6,7 +6,10 @@ Python, Flask, celery, MySQL, SQLAlchemy, git
 
 ## 임시 배포
 http://43.201.154.216/
-> AWS EC2 인스턴스 + nginx WS + gunicorn WSGI + Flask WAS
+  
+    AWS EC2 인스턴스 + nginx WS + gunicorn WSGI + Flask WAS
+    id: test@test.com / pw: test1234 계정으로 테스트가 가능합니다.
+    직접 가입 후 비밀번호 찾기 테스트를 진행하셔도 괜찮습니다.
 
 ## 개발 현황
 ### 1차 개발
