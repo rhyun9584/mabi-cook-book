@@ -40,19 +40,21 @@ def signup():
     if request.method == 'POST' and form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if not user:
+            # 유저 정보 생성
             user = User(email=form.email.data,
                         password=generate_password_hash(form.password1.data),
                         name=form.server.data + '@' + form.name.data,
                         )
             db.session.add(user)
-            db.session.commit()
 
             # 유저의 collect 정보 init
             cook_list = Cook.query.all()
             for cook in cook_list:
                 collect = Collect(user=user.id, cook=cook.id)
                 db.session.add(collect)
-                db.session.commit()
+
+            # 데이터베이스 커밋
+            db.session.commit()
 
             # 회원가입이 완료되면 로그인 페이지로 redirect
             return redirect(url_for('auth.signin'))
